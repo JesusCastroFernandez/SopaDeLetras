@@ -1,0 +1,58 @@
+public class SopaDeLetras {
+    public static void main(String[] args) {
+        // Declarar la lista de palabras a buscar
+        String[] palabras = {"Hola", "sol", "AMOR", "ARA", "Casa", "dos"};
+
+        // Declarar la sopa de letras
+        char[][] sopa = {{'H', 'O', 'L', 'A', 'M'},
+                         {'A', 'R', 'A', 'S', 'A'},
+                         {'O', 'L', 'A', 'A', 'O'},
+                         {'S', 'O', 'L', 'D', 'O'},
+                         {'C', 'A', 'S', 'A', 'S'}};
+
+        // Declarar el array de resultados
+        String[] resultados = new String[palabras.length];
+
+        // Mostrar la sopa de letras
+        System.out.println("Sopa de letras:");
+        for (int i = 0; i < sopa.length; i++) {
+            for (int j = 0; j < sopa[0].length; j++) {
+                System.out.print(sopa[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // Mostrar la lista de palabras a buscar
+        System.out.println("Palabras a buscar: " + Arrays.toString(palabras));
+
+        // Buscar las palabras en la sopa de letras
+        int encontradas = 0;
+        for (int k = 0; k < palabras.length; k++) {
+            String palabra = palabras[k];
+            boolean encontrada = false;
+            for (int i = 0; i < sopa.length; i++) {
+                for (int j = 0; j < sopa[0].length - palabra.length() + 1; j++) {
+                    String subcadena = new String(sopa[i], j, palabra.length());
+                    if (subcadena.equalsIgnoreCase(palabra)) {
+                        encontrada = true;
+                        resultados[k] = "fila " + i + " columna " + j;
+                        encontradas++;
+                        break;
+                    }
+                }
+                if (encontrada) {
+                    break;
+                }
+            }
+            if (!encontrada) {
+                resultados[k] = "no";
+            }
+        }
+
+        // Mostrar los resultados de la búsqueda
+        System.out.println("Palabras encontradas: " + encontradas);
+        for (int k = 0; k < palabras.length; k++) {
+            System.out.println(palabras[k] + ": " + resultados[k]);
+        }
+    }
+}
